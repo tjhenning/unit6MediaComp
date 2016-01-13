@@ -27,6 +27,59 @@ public class IntArrayWorker
     }
     return total;
   }
+  /**
+   * Method to return the total in a col
+   * @return the total of the values in the col
+   */
+  public int getColTotal(int colNum)
+  {
+    int total = 0;
+    for (int row = 0; row < matrix.length; row++)
+    {      
+      total = total + matrix[row][colNum];      
+    }
+    return total;
+  }
+  
+  /**
+   * Method to return the largest
+   * @return the largets value in the array
+   */
+  public int getLargest()
+  {
+    int sent = 0;
+    for (int row = 0; row < matrix.length; row++)
+    {
+      for (int col = 0; col < matrix[0].length; col++)
+      {
+        if (matrix[row][col]>sent)
+        {
+            sent=matrix[row][col];
+        }
+      }
+    }
+    return sent;
+  }
+  
+  /**
+   * Method to return the count
+   * @return the total of the values in the array
+   */
+  public int getCount(int count)
+  {
+    int total = 0;
+    for (int row = 0; row < matrix.length; row++)
+    {
+      for (int col = 0; col < matrix[0].length; col++)
+      {
+        if (matrix[row][col]==count)
+        {
+            total++;
+        }
+      }
+    }
+    return total;
+  }
   
   /**
    * Method to return the total using a nested for-each loop

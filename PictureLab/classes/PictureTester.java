@@ -49,8 +49,37 @@ public class PictureTester
     Picture swan = new Picture("swan.jpg");
     swan.edgeDetection(10);
     swan.explore();
+  }  
+  public static void testNegate()
+  {
+    Picture swan = new Picture("beach.jpg");
+    swan.negate();
+    swan.explore();
   }
-  
+  public static void testGrayscale()
+  {
+    Picture swan = new Picture("beach.jpg");
+    swan.betterGrayscale();
+    swan.explore();
+  }
+  public static void testMirror()
+  {
+    Picture swan = new Picture("beach.jpg");
+    swan.mirror();
+    swan.explore();
+  }
+  public static void testMirrorDiagonal()
+  {
+    Picture swan = new Picture("beach.jpg");
+    swan.mirrorDiagonal();
+    swan.explore();
+  }
+  public static void testMirrorArms()
+  {
+    Picture swan = new Picture("snowman.jpg");
+    swan.mirrorArms();
+    swan.explore();
+  }
   /** Main method for testing.  Every class can have a main
     * method in Java */
   public static void main(String[] args)
