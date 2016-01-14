@@ -389,14 +389,15 @@ public class Picture extends SimplePicture
      }    
   }
  
-  public void cropAndCopy(int startSourceRow, int endSourceRow, int startSourceCol, int endSourceCol,int startDestRow, int startDestCol, double multiplier)
+  public void cropAndCopy(int startSourceRow, int endSourceRow, int startSourceCol, int endSourceCol,int startDestRow, int startDestCol, double multiplier,Picture canvas)
   {
-    Pixel[][] pixels = this.getPixels2D();    
+    Pixel[][] from = this.getPixels2D(); 
+    Pixel[][] to = canvas.getPixels2D();    
     for (int i=0; i<endSourceRow-startSourceRow;i++)
     {
       for (int j=0; j<endSourceCol-startSourceCol;j++)
       {          
-          bigPixel((int)(i*multiplier)+startDestRow,(int)(j*multiplier)+startDestCol,multiplier,pixels[i+startSourceRow][j+startSourceCol],pixels);
+          bigPixel((int)(i*multiplier)+startDestRow,(int)(j*multiplier)+startDestCol,multiplier,from[i+startSourceRow][j+startSourceCol],to);
       }
     }    
   }

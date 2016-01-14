@@ -11,7 +11,7 @@ public class PictureTester
   /** Method to test zeroBlue */
   public static void testZeroBlue()
   {
-    Picture beach = new Picture("beach.jpg");
+    Picture beach = new Picture(500,500);
     beach.explore();
     beach.zeroBlue();
     beach.explore();
@@ -83,32 +83,12 @@ public class PictureTester
   /** Main method for testing.  Every class can have a main
     * method in Java */
   public static void main(String[] args)
-  {
-    // uncomment a call here to run a test
-    // and comment out the ones you don't want
-    // to run
-    testZeroBlue();
-    //testKeepOnlyBlue();
-    //testKeepOnlyRed();
-    //testKeepOnlyGreen();
-    //testNegate();
-    //testGrayscale();
-    //testFixUnderwater();
-    //testMirrorVertical();
-    //testMirrorTemple();
-    //testMirrorArms();
-    //testMirrorGull();
-    //testMirrorDiagonal();
-    //testCollage();
-    //testCopy();
-    //testEdgeDetection();
-    //testEdgeDetection2();
-    //testChromakey();
-    //testEncodeAndDecode();
-    //testGetCountRedOverValue(250);
-    //testSetRedToHalfValueInTopHalf();
-    //testClearBlueOverValue(200);
-    //testGetAverageForColumn(0);
+  {    
+    Picture collage=new Picture(700,700);
+    Picture source=new Picture("sandwich.jpg");
+   
+    source.cropAndCopy(50,200,10,200,1,1,.75,collage);
+     collage.explore();
   }
   
 //   //LookWhatIFound dump
