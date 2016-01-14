@@ -362,64 +362,33 @@ public class Picture extends SimplePicture
    */
   public static void main(String[] args) 
   {
-    Picture beach = new Picture("beach.jpg");
+    Picture beach = new Picture("snowman.jpg");
     beach.explore();
     //beach.cropAndCopy(80,120,180,230,1,1,.75);
-    beach.rotate(400,50,300,50,100,100,45);
+    beach.rotate(75,220,100,200,0,0,-30);
     beach.explore();
   }
   
   public void rotate(int startSourceRow, double width, int startSourceCol, double height,int startDestRow, int startDestCol, double rotation)
   {
-    Pixel[][] pixels = this.getPixels2D();   
-    
-//     int width=100;//(int)((width1*Math.cos(rotation))+(height1*Math.sin(rotation)));
-//     int height=100;//(int)((width1*Math.cos(rotation))+(height1*Math.sin(rotation)));    
-//     boolean[][] pixel=new boolean[width][height];
+    Pixel[][] pixels = this.getPixels2D();      
      for (int i=0; i<width;i++)
      {
        for (int j=0; j<height;j++)
        { 
-         int i2=i-(int)width/2;
-         int j2=j-(int)height/2;
+         double i2=i;
+         double j2=j;
          double dist=Math.sqrt(i2*i2+j2*j2);
-         double nrot1=rotation+Math.toDegrees(Math.atan(j2/i2));
-         int nrot=(int)nrot1;
-         pixels[startDestRow+(int)(Math.cos(nrot)*dist)][startDestCol+(int)(Math.sin(nrot)*dist)].setColor(pixels[startSourceRow+i][startSourceCol+j].getColor());
-
+         double nrot1=rotation+Math.toDegrees(Math.atan(i2/j2));
+         //int nrot=nrot1;
+         //System.out.println("Dist: "+dist+" Nrot: "+nrot);
+         //System.out.println("X: "+((int)(Math.sin(Math.toRadians(nrot))*dist))+" Y: "+((Math.cos(180)*dist)));
+        // pixels[startDestRow+(int)(Math.sin(Math.toRadians(nrot))*dist)][startDestCol+(int)(Math.cos(Math.toRadians(nrot))*dist)].setColor(pixels[startSourceRow+i][startSourceCol+j].getColor());
+         bigPixel(startDestRow+(int)(Math.sin(Math.toRadians(nrot1))*dist),startDestCol+(int)(Math.cos(Math.toRadians(nrot1))*dist),2,pixels[startSourceRow+i][startSourceCol+j],pixels);
        }
      }    
   }
-  public  int[] findTrue(boolean[][] pixels,int num)
-  {
-     int counter=0;
-    //int[] arr={1,1};
-      for (int i=0; i<pixels.length;i++)
-    {
-      for (int j=0; j<pixels[0].length;j++)
-      {    
-          //System.out.println(counter+" "+num);
-          
-          if (pixels[i][j])
-          {
-              counter++;
-          }   
-          if (counter>=num)
-          {              
-              System.out.println(counter);
-              int[] arr={i,j};
-              return arr;
-              
-          }
-          if (false){
-          System.out.println(j+" "+pixels[0].length);}
-      }
-    }
-    System.out.println(counter);
-    return null;
-      
-  }
-  //((int)((double)Math.sin(rotation)*i))((int)((double)Math.cos(rotation)*
+ 
   public void cropAndCopy(int startSourceRow, int endSourceRow, int startSourceCol, int endSourceCol,int startDestRow, int startDestCol, double multiplier)
   {
     Pixel[][] pixels = this.getPixels2D();    
@@ -433,16 +402,14 @@ public class Picture extends SimplePicture
   }
   public void bigPixel(int row, int col, double mult, Pixel pixel,Pixel[][] pixels)
   {      
-      //size+=.999;
-      //int mult=(int)size;      
-      //Pixel[][] pixels = this.getPixels2D();
       for (int i=0; i<mult;i++)
       {
           for (int j=0; j<mult;j++)
-          {                                       
-              pixels[row+i][col+j].setRed(pixel.getRed());
-              pixels[row+i][col+j].setBlue(pixel.getBlue());
-              pixels[row+i][col+j].setGreen(pixel.getGreen());
+          {                   
+              if(row+i>=0&&col+j>=0&&row+i<pixels.length&&col+j<pixels[0].length)
+              {
+              pixels[row+i][col+j].setColor(pixel.getColor());  
+            }
           }
       } 
     }

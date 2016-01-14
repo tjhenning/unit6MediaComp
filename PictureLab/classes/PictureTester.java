@@ -110,4 +110,27 @@ public class PictureTester
     //testClearBlueOverValue(200);
     //testGetAverageForColumn(0);
   }
+  
+//   //LookWhatIFound dump
+//   public void rotate(int startSourceRow, double width, int startSourceCol, double height,int startDestRow, int startDestCol, double rotation)
+//   {
+//     Pixel[][] pixels = this.getPixels2D();   
+//     
+// //     int width=100;//(int)((width1*Math.cos(rotation))+(height1*Math.sin(rotation)));
+// //     int height=100;//(int)((width1*Math.cos(rotation))+(height1*Math.sin(rotation)));    
+// //     boolean[][] pixel=new boolean[width][height];
+//      for (int i=0; i<width;i++)
+//      {
+//        for (int j=0; j<height;j++)
+//        { 
+//          double i2=i-width/2;//Remove Width For Similar Effect
+//          double j2=j-height/2;
+//          double dist=Math.sqrt(i2*i2+j2*j2);
+//          double nrot1=rotation+Math.toDegrees(Math.atan(j2/i2));
+//          int nrot=(int)nrot1;
+//          pixels[startDestRow+(int)(Math.cos(nrot)*dist)][startDestCol+(int)(Math.sin(nrot)*dist)].setColor(pixels[startSourceRow+i][startSourceCol+j].getColor());
+// 
+//        }
+//      }    
+//  }
 }
