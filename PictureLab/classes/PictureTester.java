@@ -86,9 +86,12 @@ public class PictureTester
   {    
     Picture collage=new Picture(700,700);
     Picture source=new Picture("sandwich.jpg");
-   
-    source.cropAndCopy(50,200,10,200,1,1,.75,collage);
-     collage.explore();
+    source.explore();
+    source.cropAndCopy(50,400,10,530,1,1,.75,collage);
+    source.rotate(50,350,10,520,350,100,-30,collage);
+    source.rotateAndSize(50,350,10,520,200,30,40,1.333,collage);
+    collage.limitPallete(1,200,1,300,50);
+    collage.explore();
   }
   
 //   //LookWhatIFound dump
