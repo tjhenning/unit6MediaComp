@@ -159,6 +159,23 @@ public class Picture extends SimplePicture
         }
     }        
   }
+  public void negative()
+  {
+      Pixel[][] pixels = this.getPixels2D();
+      
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {        
+          if ((pixelObj.getRed()+pixelObj.getBlue()+pixelObj.getGreen())/3<250)
+          {
+             pixelObj.setBlue(255-pixelObj.getBlue());
+             pixelObj.setGreen(255-pixelObj.getGreen());
+             pixelObj.setRed(255-pixelObj.getRed());
+            }
+        }
+    }        
+  }
   
   public void betterGrayscale()
   {
@@ -401,11 +418,7 @@ public class Picture extends SimplePicture
          double i2=i;
          double j2=j;
          double dist=Math.sqrt(i2*i2+j2*j2);
-         double nrot1=rotation+Math.toDegrees(Math.atan(i2/j2));
-         //int nrot=nrot1;
-         //System.out.println("Dist: "+dist+" Nrot: "+nrot);
-         //System.out.println("X: "+((int)(Math.sin(Math.toRadians(nrot))*dist))+" Y: "+((Math.cos(180)*dist)));
-        // pixels[startDestRow+(int)(Math.sin(Math.toRadians(nrot))*dist)][startDestCol+(int)(Math.cos(Math.toRadians(nrot))*dist)].setColor(pixels[startSourceRow+i][startSourceCol+j].getColor());
+         double nrot1=rotation+Math.toDegrees(Math.atan(i2/j2));         
          bigPixel(startDestRow+(int)(multiplier*Math.sin(Math.toRadians(nrot1))*dist),startDestCol+(int)(multiplier*Math.cos(Math.toRadians(nrot1))*dist),2*multiplier,from[startSourceRow+i][startSourceCol+j],to);
        }
      }    

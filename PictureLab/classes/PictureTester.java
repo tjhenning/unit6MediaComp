@@ -87,10 +87,20 @@ public class PictureTester
     Picture collage=new Picture(700,700);
     Picture source=new Picture("sandwich.jpg");
     source.explore();
-    source.cropAndCopy(50,400,10,530,1,1,.75,collage);
-    source.rotate(50,350,10,520,350,100,-30,collage);
-    source.rotateAndSize(50,350,10,520,200,30,40,1.333,collage);
-    collage.limitPallete(1,200,1,300,50);
+    Picture edit=new Picture("sandwich.jpg");
+    Picture edit2=new Picture(600,600);
+
+    source.rotate(50,350,10,520,-50,200,45,edit2);
+    edit2.cropAndCopy(1,480,1,530,0,430,.5,collage);
+    edit2.explore();
+    edit.mirrorDiagonal();
+    edit.grayscale();
+    
+    collage.limitPallete(1,300,300,700,85);
+    source.cropAndCopy(50,400,10,530,1,-20,.8,collage);
+    edit.rotate(50,350,10,520,100,300,30,collage);
+    source.rotateAndSize(50,350,10,520,200,30,40,(double)4/3,collage);
+    
     collage.explore();
   }
   
