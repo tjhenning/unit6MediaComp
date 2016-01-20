@@ -176,7 +176,25 @@ public class Picture extends SimplePicture
         }
     }        
   }
-  
+     public void splash(int startSourceRow, double width, int startSourceCol, double height,int startDestRow, int startDestCol, int multiplier, Picture canvas)
+  {
+    Pixel[][] from = this.getPixels2D();   
+    Pixel[][] to = canvas.getPixels2D();
+     for (int i=0; i<width;i++)
+     {
+       for (int j=0; j<height;j++)
+       { 
+         
+         double i2=i-width/2;//Remove Width For Similar Effect
+         double j2=j-height/2;
+         double dist=Math.sqrt(i2*i2+j2*j2);
+         double nrot1=45+Math.toDegrees(Math.atan(j2/i2));
+         int nrot=(int)nrot1;
+         //pixels[startDestRow+(int)(Math.cos(nrot)*dist)][startDestCol+(int)(Math.sin(nrot)*dist)].setColor(pixels[startSourceRow+i][startSourceCol+j].getColor());
+         bigPixel(startDestRow+(int)(Math.cos(nrot)*dist),startDestCol+(int)(Math.sin(nrot)*dist),2*multiplier,from[startSourceRow+i][startSourceCol+j],to);
+       }
+     }    
+  }
   public void betterGrayscale()
   {
       Pixel[][] pixels = this.getPixels2D();
@@ -436,9 +454,39 @@ public class Picture extends SimplePicture
       }
     }    
   }
+  public void pixellate(int startSourceRow, int endSourceRow, int startSourceCol, int endSourceCol,int startDestRow, int startDestCol,Picture canvas)
+  {
+    Pixel[][] from = this.getPixels2D(); 
+    Pixel[][] to = canvas.getPixels2D();    
+    for (int i=0; i<endSourceRow-startSourceRow;i++)
+    {
+      for (int j=0; j<endSourceCol-startSourceCol;j++)
+      {          
+          if (i%2==j%2&&i%2==0)
+          {
+          bigPixel(i+startDestRow,j+startDestCol,2,from[i+startSourceRow][j+startSourceCol],to);
+        }
+      }
+    }    
+  }
+  public void blur(int startSourceRow, int endSourceRow, int startSourceCol, int endSourceCol,int startDestRow, int startDestCol,double blur,Picture canvas)
+  {
+    Pixel[][] from = this.getPixels2D(); 
+    Pixel[][] to = canvas.getPixels2D();    
+    for (int i=0; i<endSourceRow-startSourceRow;i++)
+    {
+      for (int j=0; j<endSourceCol-startSourceCol;j++)
+      {         
+          int irand=(int)(blur*Math.random());
+          int jrand=(int)(blur*Math.random());
+          bigPixel(i+irand+startDestRow,j+jrand+startDestCol,blur,from[i+startSourceRow][j+startSourceCol],to);
+      }
+      
+    }    
+  }
   public void bigPixel(int row, int col, double mult, Pixel pixel,Pixel[][] pixels)
   {      
-      if ((pixel.getRed()+pixel.getBlue()+pixel.getGreen())/3<250)
+      if ((pixel.getRed()+pixel.getBlue()+pixel.getGreen())/3<249)
       {
           for (int i=0; i<mult;i++)
           {
@@ -466,4 +514,4 @@ public class Picture extends SimplePicture
         }
     }
   }
-} // this } is the end of class Picture, put all new methods before this
+} 

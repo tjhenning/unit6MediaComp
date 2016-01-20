@@ -46,7 +46,7 @@ public class PictureTester
   /** Method to test edgeDetection */
   public static void testEdgeDetection()
   {
-    Picture swan = new Picture("swan.jpg");
+    Picture swan = new Picture("sandwich.jpg");
     swan.edgeDetection(10);
     swan.explore();
   }  
@@ -87,43 +87,28 @@ public class PictureTester
     Picture collage=new Picture(700,700);
     Picture source=new Picture("sandwich.jpg");
     source.explore();
-    Picture edit=new Picture("sandwich.jpg");
-    Picture edit2=new Picture(600,600);
-
-    source.rotate(50,350,10,520,-50,200,45,edit2);
-    edit2.cropAndCopy(1,480,1,530,0,430,.5,collage);
-    edit2.explore();
-    edit.mirrorDiagonal();
-    edit.grayscale();
+    Picture edit=new Picture("sandwich.jpg");    
+    
+    ////source.rotate(50,350,10,520,-50,200,45,edit2);
+    ////edit2.cropAndCopy(1,480,1,530,0,430,.5,collage);    
+    source.rotateAndSize(50,350,10,520,-60,485,36,(double)5/8,collage);
+    
     
     collage.limitPallete(1,300,300,700,85);
-    source.cropAndCopy(50,400,10,530,1,-20,.8,collage);
-    edit.rotate(50,350,10,520,100,300,30,collage);
-    source.rotateAndSize(50,350,10,520,200,30,40,(double)4/3,collage);
     
+        
+    source.blur(50,400,10,530,50,10,5,edit);
+    //source.explore();
+    edit.cropAndCopy(50,400,10,530,20,-10,.8,collage);
+    edit=new Picture("sandwich.jpg");
+    edit.mirrorDiagonal();
+    edit.grayscale();
+    edit.rotate(50,350,10,520,80,300,30,collage);
+    edit=new Picture("sandwich.jpg");
+    edit.negative();
+    edit.rotateAndSize(50,350,10,520,200,30,40,(double)4/3,collage);
+    source.splash(50,350,10,520,600,600,2,collage);
     collage.explore();
   }
   
-//   //LookWhatIFound dump
-//   public void rotate(int startSourceRow, double width, int startSourceCol, double height,int startDestRow, int startDestCol, double rotation)
-//   {
-//     Pixel[][] pixels = this.getPixels2D();   
-//     
-// //     int width=100;//(int)((width1*Math.cos(rotation))+(height1*Math.sin(rotation)));
-// //     int height=100;//(int)((width1*Math.cos(rotation))+(height1*Math.sin(rotation)));    
-// //     boolean[][] pixel=new boolean[width][height];
-//      for (int i=0; i<width;i++)
-//      {
-//        for (int j=0; j<height;j++)
-//        { 
-//          double i2=i-width/2;//Remove Width For Similar Effect
-//          double j2=j-height/2;
-//          double dist=Math.sqrt(i2*i2+j2*j2);
-//          double nrot1=rotation+Math.toDegrees(Math.atan(j2/i2));
-//          int nrot=(int)nrot1;
-//          pixels[startDestRow+(int)(Math.cos(nrot)*dist)][startDestCol+(int)(Math.sin(nrot)*dist)].setColor(pixels[startSourceRow+i][startSourceCol+j].getColor());
-// 
-//        }
-//      }    
-//  }
 }
