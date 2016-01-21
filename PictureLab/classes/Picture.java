@@ -184,17 +184,53 @@ public class Picture extends SimplePicture
      {
        for (int j=0; j<height;j++)
        { 
-         
-         double i2=i-width/2;//Remove Width For Similar Effect
-         double j2=j-height/2;
-         double dist=Math.sqrt(i2*i2+j2*j2);
-         double nrot1=45+Math.toDegrees(Math.atan(j2/i2));
-         int nrot=(int)nrot1;
-         //pixels[startDestRow+(int)(Math.cos(nrot)*dist)][startDestCol+(int)(Math.sin(nrot)*dist)].setColor(pixels[startSourceRow+i][startSourceCol+j].getColor());
-         bigPixel(startDestRow+(int)(Math.cos(nrot)*dist),startDestCol+(int)(Math.sin(nrot)*dist),2*multiplier,from[startSourceRow+i][startSourceCol+j],to);
-       }
+         if(from[startSourceRow+i][startSourceCol+j].getRed()+from[startSourceRow+i][startSourceCol+j].getGreen()+from[startSourceRow+i][startSourceCol+j].getBlue()<420)
+         {
+             double i2=i-width/2;//Remove Width For Similar Effect
+            double j2=j-height/2;
+            double dist=Math.sqrt(i2*i2+j2*j2);
+            double nrot1=45+Math.toDegrees(Math.atan(j2/i2));
+            //int nrot=(int)nrot1;
+            //pixels[startDestRow+(int)(Math.cos(nrot)*dist)][startDestCol+(int)(Math.sin(nrot)*dist)].setColor(pixels[startSourceRow+i][startSourceCol+j].getColor());
+            bigPixel(startDestRow+(int)(Math.cos(nrot1)*dist),startDestCol+(int)(Math.sin(nrot1)*dist),2*multiplier,from[startSourceRow+i][startSourceCol+j],to);
+         }
+        }
      }    
   }
+  
+  public void sepia()
+  {
+      Pixel[][] pixels = this.getPixels2D();
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+          
+          int avg=pixelObj.getRed();
+          avg+=pixelObj.getBlue();
+          avg+=pixelObj.getGreen();
+          avg/=3;
+          pixelObj.setBlue(avg);
+          pixelObj.setGreen(avg);
+          pixelObj.setRed(avg);
+          if (avg<60)
+          {
+              pixelObj.setRed((int)((double)avg*.9));
+              pixelObj.setBlue((int)((double)avg*.9));
+              pixelObj.setGreen((int)((double)avg*.9));
+            }
+            else if(avg<190)
+            {
+                pixelObj.setBlue((int)((double)avg*.8));
+            }
+            else 
+            {
+                pixelObj.setBlue((int)((double)avg*.9));
+            }
+        }
+    }        
+  }
+  
   public void betterGrayscale()
   {
       Pixel[][] pixels = this.getPixels2D();
